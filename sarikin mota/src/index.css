@@ -9,7 +9,7 @@
 
 @media (max-width: 768px) {
   body {
-    padding-bottom: 74px !important; /* Space for BottomNav */
+    padding-bottom: 90px !important; /* Increased Space for BottomNav */
   }
 }
 

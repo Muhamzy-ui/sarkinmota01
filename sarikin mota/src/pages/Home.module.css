@@ -116,7 +116,7 @@
   background: var(--navy-800);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-xl);
-  padding: 28px;
+  padding: 20px;
   box-shadow: var(--shadow-card), 0 0 60px rgba(212,160,23,0.08);
   position: relative;
   overflow: hidden;
@@ -131,7 +131,7 @@
 
 .heroCardTop {
   display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 .heroCardLive {
   display: flex; align-items: center; gap: 6px;
@@ -147,8 +147,8 @@
 .heroCarVisual {
   background: var(--navy-900);
   border-radius: var(--radius-md);
-  padding: 32px 20px;
-  margin-bottom: 20px;
+  padding: 16px 12px;
+  margin-bottom: 12px;
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
 }
@@ -156,7 +156,7 @@
 
 .heroCardInfo {
   display: flex; justify-content: space-between; align-items: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 .heroCarBrand {
   font-size: 11px; font-weight: 700;

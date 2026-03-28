@@ -3,7 +3,7 @@
   bottom: 0; left: 0; right: 0;
   height: 74px;
   background: #000000; /* Solid Black */
-  display: flex;
+  display: none; /* Fixed: HIDDEN ON DESKTOP */
   align-items: center;
   justify-content: space-around;
   padding: 0 10px;

@@ -9,7 +9,7 @@
 .sidebar {
   width: 260px;
   flex-shrink: 0;
-  background: rgba(7, 15, 31, 0.9);
+  background: var(--navy-900); /* Theme aware */
   backdrop-filter: blur(25px) saturate(200%);
   border-right: 1px solid var(--border);
   display: flex;

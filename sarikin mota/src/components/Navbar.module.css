@@ -149,7 +149,7 @@
   right: 0;
   width: min(320px, 85vw);
   height: 100vh;
-  background: rgba(7, 15, 31, 0.92);
+  background: var(--navy-900); /* Use theme variable */
   backdrop-filter: blur(25px) saturate(200%);
   border-left: 1px solid var(--border-strong);
   z-index: 200;
@@ -159,7 +159,7 @@
   /* Elastic Spring Transition */
   transform: translateX(100%);
   transition: transform 0.7s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-  box-shadow: -20px 0 50px rgba(0, 0, 0, 0.6);
+  box-shadow: -20px 0 50px rgba(0, 0, 0, 0.2);
 }
 
 .mobileOpen { 
@@ -186,7 +186,7 @@
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 900;
-  color: var(--navy-950);
+  color: #000; /* Always light text on gold */
   border: 2px solid var(--border-strong);
   box-shadow: 0 4px 15px rgba(212, 160, 23, 0.3);
 }
@@ -195,7 +195,7 @@
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--white); /* Theme aware */
   margin: 0;
 }
 
@@ -228,7 +228,7 @@
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 700;
-  color: var(--muted);
+  color: var(--muted); /* Theme aware */
   transition: all 0.3s;
 }
 

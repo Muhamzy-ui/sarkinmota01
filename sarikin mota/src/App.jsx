@@ -28,6 +28,7 @@ function ScrollToTop() {
 }
 
 import { ThemeProvider } from './context/ThemeContext'
+import { SidebarProvider } from './context/SidebarContext'
 
 /* ... imports ... */
 
@@ -40,46 +41,48 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <AuthProvider>
-        <SavedCarsProvider>
-          <CartProvider>
-            <ScrollToTop />
-            <Toaster
-              position="top-right"
-              toastOptions={{
-                style: {
-                  background: 'var(--navy-800)',
-                  color: 'var(--off-white)',
-                  border: '1px solid var(--border)',
-                  fontFamily: 'Outfit, sans-serif',
-                },
-              }}
-            />
-            {!isAdmin && <Navbar />}
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/cars" element={<Cars />} />
-              <Route path="/cars/:slug" element={<CarDetail />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/request-car" element={<RequestCar />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/admin/cars" element={<ProtectedRoute><ManageCars /></ProtectedRoute>} />
-              <Route path="/admin/bids" element={<ProtectedRoute><ManageBids /></ProtectedRoute>} />
-              <Route path="/admin/posts" element={<ProtectedRoute><ManagePosts /></ProtectedRoute>} />
-              <Route path="/admin/gallery" element={<ProtectedRoute><ManageGallery /></ProtectedRoute>} />
-            </Routes>
-            {!isAdmin && <Footer />}
-            {!isAdmin && <BottomNav />}
-            {!isAdmin && <WhatsAppFloat />}
-            {!isAdmin && <CartDrawer />}
-          </CartProvider>
-        </SavedCarsProvider>
-      </AuthProvider>
+      <SidebarProvider>
+        <AuthProvider>
+          <SavedCarsProvider>
+            <CartProvider>
+              <ScrollToTop />
+              <Toaster
+                position="top-right"
+                toastOptions={{
+                  style: {
+                    background: 'var(--navy-800)',
+                    color: 'var(--off-white)',
+                    border: '1px solid var(--border)',
+                    fontFamily: 'Outfit, sans-serif',
+                  },
+                }}
+              />
+              {!isAdmin && <Navbar />}
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/cars" element={<Cars />} />
+                <Route path="/cars/:slug" element={<CarDetail />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/request-car" element={<RequestCar />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                <Route path="/admin/cars" element={<ProtectedRoute><ManageCars /></ProtectedRoute>} />
+                <Route path="/admin/bids" element={<ProtectedRoute><ManageBids /></ProtectedRoute>} />
+                <Route path="/admin/posts" element={<ProtectedRoute><ManagePosts /></ProtectedRoute>} />
+                <Route path="/admin/gallery" element={<ProtectedRoute><ManageGallery /></ProtectedRoute>} />
+              </Routes>
+              {!isAdmin && <Footer />}
+              {!isAdmin && <BottomNav />}
+              {!isAdmin && <WhatsAppFloat />}
+              {!isAdmin && <CartDrawer />}
+            </CartProvider>
+          </SavedCarsProvider>
+        </AuthProvider>
+      </SidebarProvider>
     </ThemeProvider>
   )
 }

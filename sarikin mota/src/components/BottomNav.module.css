@@ -1,156 +1,25 @@
 .bottomNav {
   display: none;
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 74px; /* Increased and fixed */
-  background: var(--navy-900);
-  border-top: 1px solid var(--border);
-  z-index: 1001; /* Above drawer overlay */
-  padding: 0 5px 10px;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+  bottom: 0; left: 0; right: 0;
+  height: 74px;
+  background: rgba(7, 15, 31, 0.9);
+  backdrop-filter: blur(20px);
+  align-items: center;
   justify-content: space-around;
+  padding: 0 10px;
+  z-index: 180;
+  border-top: 1px solid var(--border);
 }
 
 .navItem {
-  position: relative;
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: var(--muted);
   gap: 4px;
-  transition: all 0.2s ease;
+  text-decoration: none;
   background: none;
   border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-/* Profile Drawer */
-.drawerOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
-  z-index: 999;
-  animation: fadeIn 0.3s ease;
-}
-
-.profileDrawer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--navy-900);
-  border-top: 1px solid var(--border-strong);
-  border-radius: 24px 24px 0 0;
-  padding: 32px 24px 110px; /* Space for BottomNav */
-  z-index: 1000;
-  transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.8);
-}
-
-.drawerOpen {
-  transform: translateY(0);
-}
-
-.drawerHandle {
-  width: 40px;
-  height: 4px;
-  background: var(--border-strong);
-  border-radius: 2px;
-  margin: -16px auto 24px;
-}
-
-/* Profile Card Mobile */
-.profileHeader {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-
-.avatar {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-600), var(--gold-400));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 900;
-  color: var(--navy-950);
-  border: 3px solid var(--border-strong);
-}
-
-.profileName {
-  font-family: var(--font-display);
-  font-size: 20px;
-  color: var(--white);
-  margin: 0;
-}
-
-.profileRole {
-  font-size: 12px;
-  color: var(--gold-400);
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-/* Mobile Theme Toggle */
-.themeToggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  background: var(--navy-800);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  margin-bottom: 12px;
-  cursor: pointer;
-}
-
-.themeToggle span {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--off-white);
-}
-
-.toggleIcon {
-  color: var(--gold-400);
-}
-
-.adminLink {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
-  background: rgba(212, 160, 23, 0.05);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--gold-400);
-  transition: all 0.2s;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.navItem span {
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
 }

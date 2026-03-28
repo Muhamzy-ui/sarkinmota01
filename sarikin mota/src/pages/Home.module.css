@@ -397,25 +397,58 @@
 /* Testimonials */
 /* .testimonialSection {} */
 .testimonialTrack {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin-bottom: 40px;
+  display: flex;
+  gap: 24px;
+  transition: all 0.6s var(--ease);
 }
+
+@media (max-width: 768px) {
+  .testimonialTrack {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0 30px;
+    gap: 16px;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+  .testimonialTrack::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+}
+
 .testimonialCard {
-  background: var(--navy-700);
+  flex: 1;
+  background: var(--navy-900);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 36px;
-  transition: all 0.4s;
-  opacity: 0.5;
-  transform: scale(0.97);
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  transition: all 0.5s var(--ease);
+  opacity: 0.4;
+  transform: scale(0.9);
 }
+
+@media (max-width: 768px) {
+  .testimonialCard {
+    min-width: 90%;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    opacity: 1;
+    transform: scale(1);
+    padding: 30px 24px;
+  }
+}
+
 .testimonialActive {
   opacity: 1;
   transform: scale(1);
-  border-color: var(--border-strong);
+  border-color: var(--gold-500);
   box-shadow: var(--shadow-gold);
+}
+
+@media (max-width: 768px) {
+  .testimonialDots {
+    display: none; /* Dots are less useful with native scroll */
+  }
 }
 .testimonialStars { display: flex; gap: 4px; margin-bottom: 20px; }
 .testimonialText {

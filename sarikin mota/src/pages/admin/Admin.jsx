@@ -7,15 +7,16 @@ import {
   FiLogOut, FiPlus, FiEdit2, FiTrash2, FiUpload, FiX, FiCheck, FiRefreshCw
 } from 'react-icons/fi'
 
-import styles from './Admin.module.css'
-import { FiMenu } from 'react-icons/fi'
+import { useTheme } from '../../context/ThemeContext'
+import { FiMenu, FiMoon, FiSun, FiUser } from 'react-icons/fi'
 
 /* ─────────────── ADMIN LAYOUT ─────────────── */
 function AdminLayout({ children, title }) {
   const { logout } = useAuth()
   const navigate = useNavigate()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  
+  const { theme, toggleTheme } = useTheme()
+
   const NAV = [
     { to:'/admin',         label:'Dashboard',   icon:'📊' },
     { to:'/admin/cars',    label:'Manage Cars', icon:'🚗' },
@@ -25,6 +26,7 @@ function AdminLayout({ children, title }) {
   ]
 
   const closeSidebar = () => setIsSidebarOpen(false)
+  const currentPath = window.location.pathname
 
   return (
     <div className={styles.adminLayout}>
@@ -52,14 +54,32 @@ function AdminLayout({ children, title }) {
             <Link 
               key={to} 
               to={to} 
-              className={styles.navLink}
+              className={`${styles.navLink} ${currentPath === to ? styles.navLinkActive : ''}`}
               onClick={closeSidebar}
             >
               <span style={{fontSize: 16}}>{icon}</span> {label}
             </Link>
           ))}
         </nav>
+        
         <div className={styles.sidebarFooter}>
+          {/* Theme Toggle */}
+          <div className={styles.themeToggle} onClick={toggleTheme}>
+            <span>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</span>
+            <div className={styles.toggleIcon}>
+              {theme === 'dark' ? <FiMoon size={16}/> : <FiSun size={16}/>}
+            </div>
+          </div>
+
+          {/* Profile Section */}
+          <div className={styles.profileCard}>
+            <div className={styles.avatar}>M</div>
+            <div className={styles.profileInfo}>
+              <p>Mahmud</p>
+              <p>Super Admin</p>
+            </div>
+          </div>
+
           <button onClick={() => { logout(); navigate('/login') }} className={styles.signOutBtn}>
             <FiLogOut size={17}/> Sign Out
           </button>

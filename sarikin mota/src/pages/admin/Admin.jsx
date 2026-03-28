@@ -7,10 +7,15 @@ import {
   FiLogOut, FiPlus, FiEdit2, FiTrash2, FiUpload, FiX, FiCheck, FiRefreshCw
 } from 'react-icons/fi'
 
+import styles from './Admin.module.css'
+import { FiMenu } from 'react-icons/fi'
+
 /* ─────────────── ADMIN LAYOUT ─────────────── */
 function AdminLayout({ children, title }) {
   const { logout } = useAuth()
   const navigate = useNavigate()
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  
   const NAV = [
     { to:'/admin',         label:'Dashboard',   icon:'📊' },
     { to:'/admin/cars',    label:'Manage Cars', icon:'🚗' },
@@ -18,52 +23,51 @@ function AdminLayout({ children, title }) {
     { to:'/admin/posts',   label:'Blog Posts',  icon:'📝' },
     { to:'/admin/gallery', label:'Gallery',     icon:'🖼️' },
   ]
+
+  const closeSidebar = () => setIsSidebarOpen(false)
+
   return (
-    <div style={{display:'flex',minHeight:'100vh',background:'var(--navy-950)'}}>
-      <aside style={{
-        width:240,flexShrink:0,background:'var(--navy-900)',
-        borderRight:'1px solid var(--border)',
-        display:'flex',flexDirection:'column',
-        position:'sticky',top:0,height:'100vh',
-      }}>
-        <div style={{padding:'24px 20px',borderBottom:'1px solid var(--border)',display:'flex',alignItems:'center',gap:12}}>
-          <div style={{width:38,height:38,borderRadius:6,flexShrink:0,
-            background:'linear-gradient(135deg,var(--gold-600),var(--gold-400))',
-            display:'flex',alignItems:'center',justifyContent:'center',
-            fontFamily:'var(--font-display)',fontSize:14,fontWeight:900,color:'var(--navy-950)'}}>SM</div>
-          <div>
-            <p style={{fontSize:11,fontWeight:700,letterSpacing:'2px',color:'var(--white)'}}>SARKIN MOTA</p>
-            <p style={{fontSize:10,color:'var(--gold-400)',letterSpacing:'1px'}}>Admin Panel</p>
+    <div className={styles.adminLayout}>
+      {/* Mobile Header */}
+      <header className={styles.mobileHeader}>
+        <div className={styles.logoIcon}>SM</div>
+        <button className={styles.toggleBtn} onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          {isSidebarOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+        </button>
+      </header>
+
+      {/* Sidebar Overlay */}
+      {isSidebarOpen && <div className={styles.sidebarOverlay} onClick={closeSidebar} />}
+
+      <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
+        <div className={styles.sidebarHeader}>
+          <div className={styles.logoIcon}>SM</div>
+          <div className={styles.logoText}>
+            <p>SARKIN MOTA</p>
+            <p>Admin Panel</p>
           </div>
         </div>
-        <nav style={{flex:1,padding:'16px 12px'}}>
-          {NAV.map(({to,label,icon})=>(
-            <Link key={to} to={to} style={{
-              display:'flex',alignItems:'center',gap:12,padding:'11px 14px',
-              borderRadius:8,marginBottom:4,textDecoration:'none',fontSize:14,
-              color:'var(--muted)',fontFamily:'var(--font-body)',transition:'all .2s',
-            }}
-            onMouseEnter={e=>{e.currentTarget.style.background='var(--navy-800)';e.currentTarget.style.color='var(--off-white)'}}
-            onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.color='var(--muted)'}}>
-              <span style={{fontSize:16}}>{icon}</span> {label}
+        <nav className={styles.nav}>
+          {NAV.map(({to, label, icon}) => (
+            <Link 
+              key={to} 
+              to={to} 
+              className={styles.navLink}
+              onClick={closeSidebar}
+            >
+              <span style={{fontSize: 16}}>{icon}</span> {label}
             </Link>
           ))}
         </nav>
-        <div style={{padding:'16px 12px',borderTop:'1px solid var(--border)'}}>
-          <button onClick={()=>{logout();navigate('/login')}} style={{
-            display:'flex',alignItems:'center',gap:10,background:'none',border:'none',
-            color:'var(--muted)',cursor:'pointer',fontSize:14,fontFamily:'var(--font-body)',
-            padding:'10px 14px',width:'100%',borderRadius:8,transition:'color .2s',
-          }}
-          onMouseEnter={e=>e.currentTarget.style.color='var(--off-white)'}
-          onMouseLeave={e=>e.currentTarget.style.color='var(--muted)'}>
+        <div className={styles.sidebarFooter}>
+          <button onClick={() => { logout(); navigate('/login') }} className={styles.signOutBtn}>
             <FiLogOut size={17}/> Sign Out
           </button>
         </div>
       </aside>
-      <main style={{flex:1,padding:'36px',overflowY:'auto'}}>
-        <h1 style={{fontFamily:'var(--font-display)',fontSize:30,color:'var(--white)',
-          marginBottom:32,paddingBottom:24,borderBottom:'1px solid var(--border)'}}>{title}</h1>
+
+      <main className={styles.main}>
+        <h1 className={styles.pageTitle}>{title}</h1>
         {children}
       </main>
     </div>
@@ -117,7 +121,7 @@ export function Dashboard() {
         <div style={{textAlign:'center',padding:'60px 0',color:'var(--muted)'}}>Loading dashboard...</div>
       ) : (
         <>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:20,marginBottom:40}}>
+          <div className={styles.statsGrid}>
             {STAT_CARDS.map(s=>(
               <div key={s.label} style={{
                 background:'var(--navy-800)',border:'1px solid var(--border)',
@@ -135,7 +139,7 @@ export function Dashboard() {
             ))}
           </div>
 
-          <div style={{background:'var(--navy-800)',border:'1px solid var(--border)',borderRadius:16,overflow:'hidden'}}>
+          <div className={styles.tableWrapper}>
             <div style={{padding:'20px 24px',borderBottom:'1px solid var(--border)',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
               <h2 style={{fontFamily:'var(--font-display)',fontSize:22,color:'var(--white)'}}>Recent Listings</h2>
               <Link to="/admin/cars" style={{fontSize:13,color:'var(--gold-400)',textDecoration:'none',fontWeight:500}}>Manage All →</Link>
@@ -351,17 +355,14 @@ function CarFormModal({ car, brands, onClose, onSave }) {
           <ImageUploader images={images} onChange={setImages}/>
           <div style={{height:1,background:'var(--border)'}}/>
 
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}}>
-            <div style={{gridColumn:'1/-1'}}>
-              <F label="Car Title *">
-                <input className="form-input" value={form.title}
-                  onChange={e=>set('title',e.target.value)}
-                  placeholder="e.g. Mercedes-Benz GLE 350 AMG 2022"/>
-              </F>
-            </div>
-            <F label="Brand *">
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))',gap:20}}>
+            <F label="Listing Title">
+              <input className="form-input" value={form.title}
+                onChange={e=>set('title',e.target.value)} placeholder="e.g. 2022 Toyota Camry XLE"/>
+            </F>
+            <F label="Brand">
               <select className="form-select" value={form.brand_id} onChange={e=>set('brand_id',e.target.value)}>
-                <option value="">Select brand</option>
+                <option value="">Select Brand</option>
                 {brands.map(b=><option key={b.id} value={b.id}>{b.name}</option>)}
               </select>
             </F>
@@ -407,7 +408,7 @@ function CarFormModal({ car, brands, onClose, onSave }) {
               style={{minHeight:100}}/>
           </F>
 
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:20}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(140px, 1fr))',gap:20}}>
             <F label="Status">
               <select className="form-select" value={form.status} onChange={e=>set('status',e.target.value)}>
                 <option>Available</option><option>Reserved</option>
@@ -544,7 +545,7 @@ export function ManageCars() {
       {loading ? (
         <div style={{textAlign:'center',padding:'60px 0',color:'var(--muted)'}}>Loading cars from database...</div>
       ) : (
-        <div style={{background:'var(--navy-800)',border:'1px solid var(--border)',borderRadius:16,overflow:'hidden'}}>
+        <div className={styles.tableWrapper}>
           <table style={{width:'100%',borderCollapse:'collapse'}}>
             <thead>
               <tr style={{background:'var(--navy-900)'}}>

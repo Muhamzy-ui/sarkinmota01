@@ -98,11 +98,14 @@ export default function Home() {
           <div className={styles.heroContent}>
             <div className={`animate-in delay-1`} style={{marginBottom: 20}}>
               {isMobile ? (
-                <div className={styles.mobileHeroLogoCard}>
-                  <img src="/logo-gold.png" alt="Sarkin Mota" className={styles.mobileHeroLogo} />
-                  <div className={styles.mobileHeroText}>
-                    <h3>Sarkin Mota</h3>
-                    <span>Nigeria's Most Trusted</span>
+                <div className={styles.welcomeCard} style={{ backgroundImage: `url('/SARKIN-MOTA-PROFILE.JPG')` }}>
+                  <div className={styles.welcomeBadge}>WELCOME</div>
+                  <div className={styles.welcomeContent}>
+                    <div className={styles.welcomeBadgeTop}>👑 NIGERIA'S #1 AUTO DEALER</div>
+                    <div className={styles.welcomeFooter}>
+                      <h4 className={styles.welcomeName}>Dr. Aliyu Mohammad</h4>
+                      <p className={styles.welcomeSub}>NIGERIA'S #1 CAR DEALER</p>
+                    </div>
                   </div>
                 </div>
               ) : (

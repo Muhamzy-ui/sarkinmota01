@@ -12,7 +12,7 @@ export function About() {
     { year: '2012', event: 'Founded Sarkin Mota Autos in Kano with a vision to transform how Nigerians buy premium cars.' },
     { year: '2016', event: 'Expanded to Abuja. Grew to 50+ car transactions per month.' },
     { year: '2020', event: 'Launched on TikTok. "My Bratha!" became a national catchphrase overnight.' },
-    { year: '2022', event: 'Hit 500,000 TikTok followers. Recognised as Nigeria\'s most followed car dealer on social media.' },
+    { year: '2022', event: 'Hit 1 million TikTok followers. Recognised as Nigeria\'s most followed car dealer on social media.' },
     { year: '2024', event: 'Crossed 1.5 million followers across TikTok & Instagram. 300+ cars delivered nationwide annually.' },
   ]
   const AWARDS = [

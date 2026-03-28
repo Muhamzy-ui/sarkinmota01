@@ -56,6 +56,9 @@ const TIKTOK_VIDEOS = [
 export default function Home() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const [showAllBlog, setShowAllBlog] = useState(false)
+  const [activeTestimonial, setActiveTestimonial] = useState(0)
+  const [cars, setCars] = useState([])
+  const [loadingCars, setLoadingCars] = useState(true)
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768)

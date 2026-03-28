@@ -1,0 +1,219 @@
+.page {
+  min-height: 100vh;
+}
+
+/* Filter tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.tab {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  border-color: rgba(212, 160, 23, 0.4);
+  color: var(--gold-300);
+}
+
+.tabActive {
+  background: linear-gradient(135deg, var(--gold-600), var(--gold-400));
+  border-color: transparent;
+  color: var(--navy-950);
+}
+
+/* Masonry-style grid */
+.grid {
+  column-count: 3;
+  column-gap: 16px;
+}
+
+.item {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--navy-800);
+  border: 1px solid var(--border);
+  animation: itemIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes itemIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.item:hover .image {
+  transform: scale(1.06);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(4, 8, 18, 0.85) 0%, transparent 60%);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px;
+  gap: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.item:hover .overlay {
+  opacity: 1;
+}
+
+.expandIcon {
+  color: var(--gold-400);
+  margin-bottom: 8px;
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--off-white);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 8, 18, 0.96);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  animation: lbIn 0.3s ease;
+}
+
+@keyframes lbIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lbClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--off-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.lbClose:hover { background: rgba(255, 255, 255, 0.15); }
+
+.lbNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(212, 160, 23, 0.12);
+  border: 1px solid rgba(212, 160, 23, 0.3);
+  color: var(--gold-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.lbNav:hover {
+  background: rgba(212, 160, 23, 0.25);
+  border-color: rgba(212, 160, 23, 0.6);
+}
+
+.lbPrev { left: 20px; }
+.lbNext { right: 20px; }
+
+.lbContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(90vw, 860px);
+  width: 100%;
+}
+
+.lbImage {
+  max-height: 75vh;
+  width: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+  animation: lbImgIn 0.25s ease;
+}
+
+@keyframes lbImgIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lbCaption {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 14px;
+  text-align: center;
+}
+
+.lbCounter {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--muted-dark);
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .grid { column-count: 2; }
+}
+
+@media (max-width: 480px) {
+  .grid { column-count: 1; }
+  .lbPrev { left: 8px; }
+  .lbNext { right: 8px; }
+}

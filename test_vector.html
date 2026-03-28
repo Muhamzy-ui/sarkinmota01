@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sarkin Mota - Perfect Vector Logo</title>
+    <style>
+        body { background: #111; color: white; text-align: center; padding: 20px; font-family: sans-serif; }
+        .logo-container { margin: 20px auto; background: #222; padding: 50px; border-radius: 12px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <h2>Vector Logo Exact Geometry Test</h2>
+    <div class="logo-container">
+        <!-- SVG Canvas -->
+        <svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#E5C058" />
+                    <stop offset="50%" stop-color="#D4A017" />
+                    <stop offset="100%" stop-color="#B8860B" />
+                </linearGradient>
+            </defs>
+            <g transform="translate(100, 50)">
+                <!-- LEfT SHAPE
+                     We use a polygon.
+                     Bottom-left: 0, 160
+                     Top-left (start of slope): 0, 60
+                     Peak: 120, 0
+                     Inner-mid (gap top): 220, 80
+                     Gap bottom: 160, 140
+                     Inner peak (bottom of stroke): 120, 100
+                     Inner leg bottom: 60, 160
+                -->
+                <!-- Let's refine based on the photo. The gap is a diagonal line. 
+                     The bottom of the left leg is flat horizontally.
+                     The inner cutout is a triangle. -->
+                
+                <!-- Let's build the left shape -->
+                <path d="M 0 160 
+                         L 0 50 
+                         L 100 0 
+                         L 200 80 
+                         L 150 130 
+                         L 80 60 
+                         L 50 160 Z" 
+                      fill="url(#gold)" />
+                      
+                <!-- Right Shape -->
+                <!-- 
+                     The gap separates them. Gap Vector from (150, 130) to (200, 80).
+                     Right shape starts just below this gap.
+                     Gap top-right: 220, 100
+                     Gap bottom-left: 170, 150
+                     Peak right: 300, 0
+                     Outer top right: 400, 50
+                     Outer bottom right: 400, 160
+                     Inner leg bottom: 350, 160
+                     Inner peak: 320, 60
+                -->
+                <path d="M 180 150 
+                         L 230 100 
+                         L 300 160 
+                         L 350 160 
+                         L 320 60 
+                         L 400 50 
+                         L 400 160 Z" 
+                         fill="url(#gold)" opacity="0.3" /> <!-- Just a rough draft right now -->
+
+            </g>
+        </svg>
+    </div>
+</body>
+</html>

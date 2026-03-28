@@ -1,0 +1,21 @@
+# Frontend
+sarikin\ mota/node_modules/
+sarikin\ mota/dist/
+sarikin\ mota/.env
+sarikin\ mota/.env.local
+
+# Backend
+sarkinmota_backend/__pycache__/
+sarkinmota_backend/*.pyc
+sarkinmota_backend/venv/
+sarkinmota_backend/.env
+sarkinmota_backend/db.sqlite3
+sarkinmota_backend/staticfiles/
+sarkinmota_backend/media/
+
+# OS/Editor
+.DS_Store
+.vscode/
+dist/
+node_modules/
+*.log

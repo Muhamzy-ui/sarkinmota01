@@ -68,15 +68,19 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* CTA */}
           <div className={styles.actions}>
-            <Link to="/cars?view=saved" className={styles.cartIcon} title="Saved Cars">
-              <FiHeart size={20} />
-              {savedCount > 0 && <span className={styles.cartBadge}>{savedCount}</span>}
-            </Link>
-            <button onClick={() => setCartOpen(true)} className={styles.cartIcon} title="Cart" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-              <FiShoppingCart size={20} />
-              {cartCount > 0 && <span className={styles.cartBadge} style={{ background: '#22c55e' }}>{cartCount}</span>}
+            <button 
+              onClick={toggleTheme}
+              style={{
+                background: 'rgba(212,160,23,0.08)', border: '1px solid var(--border)',
+                borderRadius: '50%', width: 38, height: 38,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--gold-400)', cursor: 'pointer', transition: 'all 0.3s'
+              }}
+              title="Toggle Light/Dark Theme"
+              aria-label="Toggle Light/Dark Theme"
+            >
+              {theme === 'light' ? <FiMoon size={18} /> : <FiSun size={18} />}
             </button>
             <Link to="/request-car" className={`btn btn-outline btn-sm ${styles.btnOutline}`}>
               Request a Car

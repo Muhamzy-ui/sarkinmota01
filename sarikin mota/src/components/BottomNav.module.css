@@ -4,14 +4,12 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 64px;
-  background: rgba(7, 15, 31, 0.85);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(212, 160, 23, 0.15);
+  height: 74px; /* Increased and fixed */
+  background: var(--navy-900);
+  border-top: 1px solid var(--border);
   z-index: 1000;
-  padding: 0 10px;
-  padding-bottom: env(safe-area-inset-bottom);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  padding: 0 10px 10px; /* Constant bottom padding */
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
 }
 
 .navItem {

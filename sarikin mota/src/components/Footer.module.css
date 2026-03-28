@@ -157,13 +157,20 @@ a.contactItem:hover .contactValue::after { width: 100%; }
   .brand { grid-column: 1 / -1; }
 }
 @media (max-width: 640px) {
-  .footer { padding-top: 40px; }
-  .topBand { margin-bottom: 40px; }
-  .grid { grid-template-columns: 1fr; gap: 40px; padding-bottom: 40px; }
-  .brand { grid-column: 1; }
-  .logoMain { font-size: 16px; }
-  .desc { font-size: 13px; max-width: 100%; margin-bottom: 20px; }
-  .bottomInner { flex-direction: column; gap: 8px; text-align: center; }
+  .footer { padding-top: 32px; }
+  .topBand { margin-bottom: 32px; height: 2px; }
+  .grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 32px 20px; 
+    padding-bottom: 32px; 
+  }
+  .brand { grid-column: 1 / -1; margin-bottom: 20px; }
+  .logoMain { font-size: 15px; }
+  .desc { font-size: 13px; max-width: 100%; margin-bottom: 16px; line-height: 1.6; }
+  .colTitle { margin-bottom: 16px; font-size: 10px; }
+  .colLink { font-size: 13px; }
+  .contactValue { font-size: 13px; }
+  .bottomInner { flex-direction: column; gap: 6px; text-align: center; }
   
   /* Reset delays on mobile so they load together smoothly */
   .visible .brand, .visible .col:nth-child(n) { transition-delay: 0.1s; }

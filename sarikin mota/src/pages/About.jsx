@@ -13,7 +13,7 @@ export function About() {
     { year: '2016', event: 'Expanded to Abuja. Grew to 50+ car transactions per month.' },
     { year: '2020', event: 'Launched on TikTok. "My Bratha!" became a national catchphrase overnight.' },
     { year: '2022', event: 'Hit 500,000 TikTok followers. Recognised as Nigeria\'s most followed car dealer on social media.' },
-    { year: '2024', event: 'Crossed 800,000 followers across TikTok & Instagram. 300+ cars delivered nationwide annually.' },
+    { year: '2024', event: 'Crossed 1.5 million followers across TikTok & Instagram. 300+ cars delivered nationwide annually.' },
   ]
   const AWARDS = [
     { icon: '👑', title: 'Sarkin Motochin Kasar Hausa', sub: 'King of Cars, Northern Nigeria' },
@@ -87,7 +87,7 @@ export function About() {
               {/* Social stats */}
               <div style={{display:'flex',justifyContent:'space-around',marginTop:28,
                 paddingTop:28,borderTop:'1px solid var(--border)'}}>
-                {[{n:'800K+',l:'TikTok'},{n:'479K+',l:'Instagram'},{n:'144K+',l:'Twitter'}].map(s=>(
+                {[{n:'1.5M+',l:'TikTok'},{n:'479K+',l:'Instagram'},{n:'144K+',l:'Twitter'}].map(s=>(
                   <div key={s.l} style={{textAlign:'center'}}>
                     <p style={{fontFamily:'var(--font-display)',fontSize:22,fontWeight:900,
                       background:'linear-gradient(135deg,var(--gold-300),var(--gold-500))',

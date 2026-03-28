@@ -12,7 +12,7 @@ import { getCars } from '../services/api'
 import styles from './Home.module.css'
 
 const STATS = [
-  { value: '800K+', label: 'TikTok Followers' },
+  { value: '1.5M+', label: 'TikTok Followers' },
   { value: '12M+', label: 'Total Likes' },
   { value: '312+', label: 'Cars Delivered' },
   { value: '18+', label: 'Car Brands' },
@@ -54,9 +54,14 @@ const TIKTOK_VIDEOS = [
 ]
 
 export default function Home() {
-  const [activeTestimonial, setActiveTestimonial] = useState(0)
-  const [cars, setCars] = useState([])
-  const [loadingCars, setLoadingCars] = useState(true)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+  const [showAllBlog, setShowAllBlog] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     getCars({ limit: 8 })
@@ -89,11 +94,21 @@ export default function Home() {
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroContent}>
             <div className={`animate-in delay-1`} style={{marginBottom: 20}}>
-              <FlipCard 
-                frontImage="/logo-gold.png" 
-                title="Sarkin Mota"
-                backText="Nigeria's most trusted luxury car dealer. From Kano to the world, we deliver quality with zero compromise. My Bratha, your dream car is here."
-              />
+              {isMobile ? (
+                <div className={styles.mobileHeroLogoCard}>
+                  <img src="/logo-gold.png" alt="Sarkin Mota" className={styles.mobileHeroLogo} />
+                  <div className={styles.mobileHeroText}>
+                    <h3>Sarkin Mota</h3>
+                    <span>Nigeria's Most Trusted</span>
+                  </div>
+                </div>
+              ) : (
+                <FlipCard 
+                  frontImage="/logo-gold.png" 
+                  title="Sarkin Mota"
+                  backText="Nigeria's most trusted luxury car dealer. From Kano to the world, we deliver quality with zero compromise. My Bratha, your dream car is here."
+                />
+              )}
             </div>
 
             <div className={`section-eyebrow animate-in delay-1 ${styles.eyebrow}`}>
@@ -131,7 +146,7 @@ export default function Home() {
               <div className={styles.trustDivider} />
               <div className={styles.trustBadge}>
                 <span className={styles.trustDot} />
-                <span>800K+ Followers</span>
+                <span>1.5M+ Followers</span>
               </div>
             </div>
           </div>
@@ -230,8 +245,8 @@ export default function Home() {
           </div>
 
           <div className={styles.carsGrid}>
-            {cars.map(car => (
-              <CarCard key={car.id} car={car} variant="home" />
+            {cars.slice(0, isMobile ? 4 : 8).map((car, index) => (
+              <CarCard key={car.id || index} car={car} variant="home" />
             ))}
           </div>
 
@@ -388,7 +403,7 @@ export default function Home() {
 
           <div className={styles.tiktokFollowers}>
             <div className={styles.followerStat}>
-              <span className={styles.followerNum}>800K+</span>
+              <span className={styles.followerNum}>1.5M+</span>
               <span className={styles.followerLabel}>Followers</span>
             </div>
             <div className={styles.followerDivider} />
@@ -457,9 +472,9 @@ export default function Home() {
           </div>
 
           <div className={styles.blogGrid}>
-            {MOCK_POSTS.slice(0, 3).map((post, i) => (
+            {(isMobile && !showAllBlog ? MOCK_POSTS.slice(0, 1) : MOCK_POSTS.slice(0, 3)).map((post, i) => (
               <Link key={post.id} to={`/blog/${post.slug}`}
-                className={`${styles.blogCard} ${i === 0 ? styles.blogFeatured : ''}`}>
+                className={`${styles.blogCard} ${i === 0 && !isMobile ? styles.blogFeatured : ''}`}>
                 <div className={styles.blogThumb}>
                   <div className={styles.blogThumbInner}>
                     <span className={styles.blogThumbIcon}>
@@ -481,6 +496,17 @@ export default function Home() {
               </Link>
             ))}
           </div>
+
+          {isMobile && (
+            <div style={{ textAlign: 'center', marginTop: 32 }}>
+              <button 
+                onClick={() => setShowAllBlog(!showAllBlog)}
+                className="btn btn-outline btn-sm"
+              >
+                {showAllBlog ? 'Show Less' : 'Show More Articles'}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

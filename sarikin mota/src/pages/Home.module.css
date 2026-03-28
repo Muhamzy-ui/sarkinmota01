@@ -596,6 +596,43 @@
   .statsGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Mobile Hero Logo Card */
+.mobileHeroLogoCard {
+  background: var(--navy-800);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-card);
+  animation: cardIn 0.6s ease both;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.mobileHeroLogo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.mobileHeroText h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--white);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.mobileHeroText span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold-400);
+  font-weight: 700;
+}
+
 /* ── Animated Profile Card ── */
 .profileCard {
   background: var(--navy-800);

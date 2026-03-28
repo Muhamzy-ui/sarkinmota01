@@ -17,12 +17,9 @@ export default function BottomNav() {
         <FiGrid size={22} className={styles.icon} />
         <span>Inventory</span>
       </NavLink>
-      <NavLink to="/cars?view=saved" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
-        <div style={{ position: 'relative', display: 'inline-flex' }}>
-          <FiHeart size={22} className={styles.icon} />
-          {savedCount > 0 && <span className={styles.badge}>{savedCount}</span>}
-        </div>
-        <span>Saved</span>
+      <NavLink to="/about" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
+        <FiInfo size={22} className={styles.icon} />
+        <span>About</span>
       </NavLink>
       <NavLink to="/contact" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
         <FiMessageSquare size={22} className={styles.icon} />

@@ -7,7 +7,7 @@ import CarCard from '../components/CarCard'
 import AnimatedHeroCard from '../components/AnimatedHeroCard'
 import FlipCard from '../components/FlipCard'
 import { MOCK_CARS, MOCK_TESTIMONIALS, MOCK_POSTS } from '../utils/mockData'
-import { formatPrice, formatDate } from '../utils/helpers'
+import { formatPrice, formatDate, resolveImageUrl } from '../utils/helpers'
 import { getCars } from '../services/api'
 import styles from './Home.module.css'
 
@@ -185,54 +185,67 @@ export default function Home() {
       <section className="section section-light" style={{paddingBottom: 0}}>
         <div className="container">
           <div className={styles.specialDeal}>
-            <div className={styles.heroCard} style={{maxWidth: 500, margin: '0 auto'}}>
-              <div className={styles.heroCardTop}>
-                <div className={styles.heroCardLive}>
-                  <div className={styles.liveDot} />
-                  <span>DEAL OF THE WEEK</span>
-                </div>
-                <div className={styles.trustStars}>
-                  {[...Array(5)].map((_, i) => <HiOutlineStar key={i} size={14} fill="var(--gold-400)" color="var(--gold-400)" />)}
-                </div>
-              </div>
+            {cars.find(c => c.is_deal_of_the_week) || cars[0] ? (() => {
+              const dealCar = cars.find(c => c.is_deal_of_the_week) || cars[0];
+              return (
+                <div className={styles.heroCard} style={{maxWidth: 500, margin: '0 auto'}}>
+                  <div className={styles.heroCardTop}>
+                    <div className={styles.heroCardLive}>
+                      <div className={styles.liveDot} />
+                      <span>DEAL OF THE WEEK</span>
+                    </div>
+                    <div className={styles.trustStars}>
+                      {[...Array(5)].map((_, i) => <HiOutlineStar key={i} size={14} fill="var(--gold-400)" color="var(--gold-400)" />)}
+                    </div>
+                  </div>
 
-              <div className={styles.heroCarVisual}>
-                <svg viewBox="0 0 480 240" className={styles.heroCarSvg}>
-                  <defs>
-                    <linearGradient id="carGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="var(--gold-600)" />
-                      <stop offset="100%" stopColor="var(--gold-400)" />
-                    </linearGradient>
-                  </defs>
-                  <path d="M60 155 L97 97 Q135 72 170 70 L310 70 Q345 72 383 97 L420 155 L432 168 L432 186 L48 186 L48 168 Z" 
-                        fill="rgba(212,160,23,0.1)" stroke="url(#carGrad2)" strokeWidth="2.5"/>
-                  <circle cx="148" cy="186" r="34" fill="var(--navy-950)" stroke="var(--gold-500)" strokeWidth="3"/>
-                  <circle cx="148" cy="186" r="20" fill="rgba(212,160,23,0.2)" stroke="var(--gold-400)" strokeWidth="1"/>
-                  <circle cx="332" cy="186" r="34" fill="var(--navy-950)" stroke="var(--gold-500)" strokeWidth="3"/>
-                  <circle cx="332" cy="186" r="20" fill="rgba(212,160,23,0.2)" stroke="var(--gold-400)" strokeWidth="1"/>
-                  <path d="M160 102 L188 75 L292 75 L320 102 Z" fill="rgba(21,45,96,0.8)" stroke="rgba(212,160,23,0.3)" strokeWidth="1.5"/>
-                </svg>
-              </div>
+                  <div className={styles.heroCarVisual}>
+                    {dealCar.primary_image ? (
+                      <img 
+                        src={resolveImageUrl(dealCar.primary_image)} 
+                        alt={dealCar.title} 
+                        className={styles.heroCarImg}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}
+                      />
+                    ) : (
+                      <svg viewBox="0 0 480 240" className={styles.heroCarSvg}>
+                        <defs>
+                          <linearGradient id="carGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="var(--gold-600)" />
+                            <stop offset="100%" stopColor="var(--gold-400)" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M60 155 L97 97 Q135 72 170 70 L310 70 Q345 72 383 97 L420 155 L432 168 L432 186 L48 186 L48 168 Z" 
+                              fill="rgba(212,160,23,0.1)" stroke="url(#carGrad2)" strokeWidth="2.5"/>
+                      </svg>
+                    )}
+                  </div>
 
-              <div className={styles.heroCardInfo}>
-                <div>
-                  <p className={styles.heroCarBrand}>Special Listing</p>
-                  <h3 className={styles.heroCarName}>Mercedes-Benz G63 AMG</h3>
-                  <p className={styles.heroCarSpecs}>2023 · 0KM · Biturbo V8</p>
-                </div>
-                <div>
-                  <p className={styles.heroPriceLabel}>Asking Price</p>
-                  <p className={styles.heroPriceValue}>₦185M</p>
-                </div>
-              </div>
+                  <div className={styles.heroCardInfo}>
+                    <div>
+                      <p className={styles.heroCarBrand}>{dealCar.brand?.name || 'Exclusive Deal'}</p>
+                      <h3 className={styles.heroCarName}>{dealCar.title}</h3>
+                      <p className={styles.heroCarSpecs}>{dealCar.year} · {dealCar.mileage}KM · {dealCar.transmission}</p>
+                    </div>
+                    <div>
+                      <p className={styles.heroPriceLabel}>Asking Price</p>
+                      <p className={styles.heroPriceValue}>{formatPrice(dealCar.price)}</p>
+                    </div>
+                  </div>
 
-              <div className={styles.heroCardActions} style={{marginTop: 10}}>
-                <Link to="/cars/mercedes-benz-gle-2022" className="btn btn-gold btn-sm" style={{flex:1, justifyContent:'center'}}>View Details</Link>
-                <button className="btn btn-outline btn-sm" style={{padding:'10px'}}>
-                  <HiOutlineSparkles size={18}/>
-                </button>
+                  <div className={styles.heroCardActions} style={{marginTop: 10}}>
+                    <Link to={`/cars/${dealCar.slug}`} className="btn btn-gold btn-sm" style={{flex:1, justifyContent:'center'}}>View Details</Link>
+                    <a href={dealCar.whatsapp_link} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-sm" style={{padding:'10px'}}>
+                      <FiMessageCircle size={18}/>
+                    </a>
+                  </div>
+                </div>
+              );
+            })() : (
+              <div className={styles.heroCard} style={{maxWidth: 500, margin: '0 auto', textAlign: 'center', padding: '40px'}}>
+                <p style={{color: 'var(--muted)'}}>New deals coming soon...</p>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>

@@ -293,6 +293,7 @@ function CarFormModal({ car, brands, onClose, onSave }) {
     status:       car?.status       || 'Available',
     badge:        car?.badge        || '',
     is_featured:  car?.is_featured  || false,
+    is_deal_of_the_week: car?.is_deal_of_the_week || false,
   })
   const [images, setImages] = useState(
     car?.images?.filter(i => i.image || i.url).map(i => ({ id:i.id, url: i.image || i.url, is_primary: i.is_primary })) || []
@@ -459,6 +460,26 @@ function CarFormModal({ car, brands, onClose, onSave }) {
                 </button>
                 <span style={{fontSize:13,color:form.is_featured?'var(--gold-400)':'var(--muted)'}}>
                   {form.is_featured?'Yes':'No'}
+                </span>
+              </div>
+            </F>
+            <F label="Deal of the Week?">
+              <div style={{display:'flex',alignItems:'center',gap:12,marginTop:4}}>
+                <button onClick={()=>set('is_deal_of_the_week',!form.is_deal_of_the_week)}
+                  style={{
+                    width:48,height:26,borderRadius:13,border:'none',cursor:'pointer',
+                    background:form.is_deal_of_the_week?'#22c55e':'var(--navy-700)',
+                    position:'relative',transition:'background .25s',
+                  }}>
+                  <div style={{
+                    position:'absolute',top:3,
+                    left:form.is_deal_of_the_week?'calc(100% - 23px)':3,
+                    width:20,height:20,borderRadius:'50%',
+                    background:'white',transition:'left .25s',
+                  }}/>
+                </button>
+                <span style={{fontSize:13,color:form.is_deal_of_the_week?'#4ade80':'var(--muted)'}}>
+                  {form.is_deal_of_the_week?'Yes':'No'}
                 </span>
               </div>
             </F>

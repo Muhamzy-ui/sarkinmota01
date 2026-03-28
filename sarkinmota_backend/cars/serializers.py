@@ -58,7 +58,7 @@ class CarDetailSerializer(serializers.ModelSerializer):
             'id', 'title', 'slug', 'brand', 'brand_id', 'category',
             'price', 'mileage', 'year', 'transmission', 'engine_size',
             'color', 'description', 'features', 'status', 'badge',
-            'is_featured', 'whatsapp_link', 'views', 'images',
+            'is_featured', 'is_deal_of_the_week', 'whatsapp_link', 'views', 'images',
             'bid_count', 'created_at', 'updated_at',
         ]
         read_only_fields = ['slug', 'views', 'created_at', 'updated_at']

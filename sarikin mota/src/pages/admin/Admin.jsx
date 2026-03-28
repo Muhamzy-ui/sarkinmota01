@@ -7,6 +7,7 @@ import {
   FiLogOut, FiPlus, FiEdit2, FiTrash2, FiUpload, FiX, FiCheck, FiRefreshCw
 } from 'react-icons/fi'
 
+import styles from './Admin.module.css'
 import { useTheme } from '../../context/ThemeContext'
 import { FiMenu, FiMoon, FiSun, FiUser } from 'react-icons/fi'
 
